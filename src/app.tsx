@@ -1,3 +1,11 @@
+import { AttendeeList } from "./components/attendee-list";
+import { Header } from "./components/header";
+
 export function App() {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  return (
+    <div className="flex gap-2">
+      <Header />
+      <AttendeeList />
+    </div>
+  );
 }
