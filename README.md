@@ -28,9 +28,9 @@ This is an Front-end web project, build with ReactJS, which simulates an event m
   - List an attendee's badge information.
   - Create the attendee check-in.
 
-<!-- ## Used Techs
+## Used Techs
 
-- AAA: aaa -->
+- Vite:
 
 # Author
 
