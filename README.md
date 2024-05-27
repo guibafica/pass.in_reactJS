@@ -31,6 +31,7 @@ This is an Front-end web project, build with ReactJS, which simulates an event m
 ## Used Techs
 
 - Vite:
+- Lucide:
 
 # Author
 
