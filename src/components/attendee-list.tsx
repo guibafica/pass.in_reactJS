@@ -11,6 +11,7 @@ import { IconButton } from "./icon-button";
 
 import { Table } from "./table/table";
 import { TableHeader } from "./table/table-header";
+import { TableCell } from "./table/table-cell";
 
 export function AttendeeList() {
   return (
@@ -54,39 +55,37 @@ export function AttendeeList() {
               key={index}
               className="border-b border-white/10 hover:bg-white/5"
             >
-              <td className="py-3 px-4 text-sm text-zinc-300">
+              <TableHeader>
                 <input
                   type="checkbox"
                   className="size-4 bg-black/20 rounded border border-white/10"
                 />
-              </td>
+              </TableHeader>
 
-              <td className="py-3 px-4 text-sm text-zinc-300">56465</td>
-              <td className="py-3 px-4 text-sm text-zinc-300">
+              <TableHeader>56465</TableHeader>
+              <TableHeader>
                 <div className="flex flex-col gap-1">
                   <span className="font-semibold text-white">
                     Jeremias Astio
                   </span>
                   <span>jeremias@hotmail.com</span>
                 </div>
-              </td>
-              <td className="py-3 px-4 text-sm text-zinc-300">7 days ago</td>
-              <td className="py-3 px-4 text-sm text-zinc-300">7 days ago</td>
+              </TableHeader>
+              <TableHeader>7 days ago</TableHeader>
+              <TableHeader>7 days ago</TableHeader>
 
-              <td className="py-3 px-4 text-sm text-zinc-300">
+              <TableHeader>
                 <IconButton transparent>
                   <MoreHorizontal className="size-4" />
                 </IconButton>
-              </td>
+              </TableHeader>
             </tr>
           ))}
         </tbody>
 
         <tfoot>
           <tr>
-            <td className="py-3 px-4 text-sm text-zinc-300" colSpan={3}>
-              Showing 10 of 280 items
-            </td>
+            <TableCell colSpan={3}>Showing 10 of 280 items</TableCell>
 
             <td
               className="py-3 px-4 text-sm text-zinc-300 text-right"
