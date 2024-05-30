@@ -10,6 +10,7 @@ import {
 import { IconButton } from "./icon-button";
 
 import { Table } from "./table/table";
+import { TableHeader } from "./table/table-header";
 
 export function AttendeeList() {
   return (
@@ -31,31 +32,19 @@ export function AttendeeList() {
       <Table>
         <thead>
           <tr className="border-b border-white/10">
-            <th
-              style={{ width: 48 }}
-              className="py-3 px-4 text-sm font-semibold text-left"
-            >
+            <TableHeader style={{ width: 48 }}>
               <input
                 type="checkbox"
                 className="size-4 bg-black/20 rounded border border-white/10 accent-orange-400"
               />
-            </th>
+            </TableHeader>
 
-            <th className="py-3 px-4 text-sm font-semibold text-left">Code</th>
-            <th className="py-3 px-4 text-sm font-semibold text-left">
-              Attendees
-            </th>
-            <th className="py-3 px-4 text-sm font-semibold text-left">
-              Registration Date
-            </th>
-            <th className="py-3 px-4 text-sm font-semibold text-left">
-              Check-In Date
-            </th>
+            <TableHeader>Code</TableHeader>
+            <TableHeader>Attendees</TableHeader>
+            <TableHeader>Registration Date</TableHeader>
+            <TableHeader>Check-In Date</TableHeader>
 
-            <th
-              style={{ width: 64 }}
-              className="py-3 px-4 text-sm font-semibold text-left"
-            ></th>
+            <th style={{ width: 64 }}></th>
           </tr>
         </thead>
 
