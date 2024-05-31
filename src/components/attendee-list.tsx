@@ -1,3 +1,6 @@
+import { ChangeEvent, useCallback, useState } from "react";
+import { formatRelative } from "date-fns";
+import { enCA } from "date-fns/locale";
 import {
   Search,
   MoreHorizontal,
@@ -13,8 +16,18 @@ import { Table } from "./table/table";
 import { TableHeader } from "./table/table-header";
 import { TableCell } from "./table/table-cell";
 import { TableRow } from "./table/table-row";
+import { attendees } from "../data/attendees";
 
 export function AttendeeList() {
+  const [, setSearch] = useState("");
+
+  const onSearchInputChanged = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setSearch(e.target.value);
+    },
+    []
+  );
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-3 items-center">
@@ -26,6 +39,7 @@ export function AttendeeList() {
           <input
             type="text"
             placeholder="Search for attendees..."
+            onChange={onSearchInputChanged}
             className="bg-transparent flex-1 outline-none border-0 p-0 text-sm ring-0"
           />
         </div>
@@ -51,8 +65,8 @@ export function AttendeeList() {
         </thead>
 
         <tbody>
-          {Array.from({ length: 5 }).map((_, index) => (
-            <TableRow key={index}>
+          {attendees.map((attendee) => (
+            <TableRow key={attendee.id}>
               <TableHeader>
                 <input
                   type="checkbox"
@@ -64,13 +78,21 @@ export function AttendeeList() {
               <TableHeader>
                 <div className="flex flex-col gap-1">
                   <span className="font-semibold text-white">
-                    Jeremias Astio
+                    {attendee.name}
                   </span>
-                  <span>jeremias@hotmail.com</span>
+                  <span>{attendee.email}</span>
                 </div>
               </TableHeader>
-              <TableHeader>7 days ago</TableHeader>
-              <TableHeader>7 days ago</TableHeader>
+              <TableHeader>
+                {formatRelative(attendee.createdAt, new Date(), {
+                  locale: enCA,
+                })}
+              </TableHeader>
+              <TableHeader>
+                {formatRelative(attendee.checkInAt, new Date(), {
+                  locale: enCA,
+                })}
+              </TableHeader>
 
               <TableHeader>
                 <IconButton transparent>
