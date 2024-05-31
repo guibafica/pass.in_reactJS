@@ -1,6 +1,7 @@
 import { ChangeEvent, useCallback, useState } from "react";
-import { formatRelative } from "date-fns";
-import { enCA } from "date-fns/locale";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/en-ca";
 import {
   Search,
   MoreHorizontal,
@@ -17,6 +18,9 @@ import { TableHeader } from "./table/table-header";
 import { TableCell } from "./table/table-cell";
 import { TableRow } from "./table/table-row";
 import { attendees } from "../data/attendees";
+
+dayjs.extend(relativeTime);
+dayjs.locale("en-ca");
 
 export function AttendeeList() {
   const [, setSearch] = useState("");
@@ -83,16 +87,8 @@ export function AttendeeList() {
                   <span>{attendee.email}</span>
                 </div>
               </TableHeader>
-              <TableHeader>
-                {formatRelative(attendee.createdAt, new Date(), {
-                  locale: enCA,
-                })}
-              </TableHeader>
-              <TableHeader>
-                {formatRelative(attendee.checkInAt, new Date(), {
-                  locale: enCA,
-                })}
-              </TableHeader>
+              <TableHeader>{dayjs().to(dayjs(attendee.createdAt))}</TableHeader>
+              <TableHeader>{dayjs().to(dayjs(attendee.checkInAt))}</TableHeader>
 
               <TableHeader>
                 <IconButton transparent>
