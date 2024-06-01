@@ -17,7 +17,6 @@ import { Table } from "./table/table";
 import { TableHeader } from "./table/table-header";
 import { TableCell } from "./table/table-cell";
 import { TableRow } from "./table/table-row";
-import { attendees } from "../data/attendees";
 
 dayjs.extend(relativeTime);
 dayjs.locale("en-ca");
@@ -25,6 +24,7 @@ dayjs.locale("en-ca");
 export function AttendeeList() {
   const [, setSearch] = useState("");
   const [page, setPage] = useState(1);
+  const [attendees, setAttendees] = useState([]);
 
   const totalPages = Math.ceil(attendees.length / 10);
 
