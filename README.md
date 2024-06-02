@@ -32,6 +32,8 @@ This is an Front-end web project, build with ReactJS, which simulates an event m
 
 - Vite:
 - Lucide:
+- Faker JS:
+- Dayjs:
 
 # Author
 
