@@ -21,10 +21,18 @@ import { TableRow } from "./table/table-row";
 dayjs.extend(relativeTime);
 dayjs.locale("en-ca");
 
+interface IAttendeeProps {
+  id: string;
+  name: string;
+  email: string;
+  checkInAt: string | null;
+  createdAt: string;
+}
+
 export function AttendeeList() {
   const [, setSearch] = useState("");
   const [page, setPage] = useState(1);
-  const [attendees, setAttendees] = useState([]);
+  const [attendees, setAttendees] = useState<IAttendeeProps[]>([]);
 
   const totalPages = Math.ceil(attendees.length / 10);
 
@@ -96,7 +104,7 @@ export function AttendeeList() {
         </thead>
 
         <tbody>
-          {attendees.slice((page - 1) * 10, page * 10).map((attendee) => (
+          {attendees.map((attendee) => (
             <TableRow key={attendee.id}>
               <TableHeader>
                 <input
@@ -115,7 +123,13 @@ export function AttendeeList() {
                 </div>
               </TableHeader>
               <TableHeader>{dayjs().to(dayjs(attendee.createdAt))}</TableHeader>
-              <TableHeader>{dayjs().to(dayjs(attendee.checkInAt))}</TableHeader>
+              <TableHeader>
+                {attendee.checkInAt ? (
+                  dayjs().to(dayjs(attendee.checkInAt))
+                ) : (
+                  <span className="text-zinc-500">-</span>
+                )}
+              </TableHeader>
 
               <TableHeader>
                 <IconButton transparent>
