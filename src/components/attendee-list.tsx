@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/en-ca";
@@ -50,6 +50,14 @@ export function AttendeeList() {
   const goToLastPage = useCallback(() => {
     setPage(totalPages);
   }, [totalPages]);
+
+  useEffect(() => {
+    fetch(
+      "http://localhost:3333/events/9e9bd979-9d10-4915-b339-3786b1634f33/attendees"
+    )
+      .then((response) => response.json())
+      .then((data) => setAttendees(data.attendees));
+  }, [page]);
 
   return (
     <div className="flex flex-col gap-4">
