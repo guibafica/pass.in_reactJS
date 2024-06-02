@@ -33,8 +33,9 @@ export function AttendeeList() {
   const [, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [attendees, setAttendees] = useState<IAttendeeProps[]>([]);
+  const [total, setTotal] = useState(0);
 
-  const totalPages = Math.ceil(attendees.length / 10);
+  const totalPages = Math.ceil(total / 10);
 
   const onSearchInputChanged = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -64,7 +65,10 @@ export function AttendeeList() {
       "http://localhost:3333/events/9e9bd979-9d10-4915-b339-3786b1634f33/attendees"
     )
       .then((response) => response.json())
-      .then((data) => setAttendees(data.attendees));
+      .then((data) => {
+        setAttendees(data.attendees);
+        setTotal(data.total);
+      });
   }, [page]);
 
   return (
