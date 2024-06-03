@@ -30,7 +30,7 @@ interface IAttendeeProps {
 }
 
 export function AttendeeList() {
-  const [, setSearch] = useState("");
+  const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [attendees, setAttendees] = useState<IAttendeeProps[]>([]);
   const [total, setTotal] = useState(0);
@@ -40,6 +40,7 @@ export function AttendeeList() {
   const onSearchInputChanged = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       setSearch(e.target.value);
+      setPage(1);
     },
     []
   );
@@ -66,7 +67,7 @@ export function AttendeeList() {
     );
 
     url.searchParams.set("pageIndex", String(page - 1));
-    url.searchParams.set("query", "Lynn");
+    if (search.length > 0) url.searchParams.set("query", search);
 
     fetch(url)
       .then((response) => response.json())
@@ -74,7 +75,7 @@ export function AttendeeList() {
         setAttendees(data.attendees);
         setTotal(data.total);
       });
-  }, [page]);
+  }, [page, search]);
 
   return (
     <div className="flex flex-col gap-4">
