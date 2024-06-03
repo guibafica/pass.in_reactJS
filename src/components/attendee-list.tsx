@@ -62,7 +62,9 @@ export function AttendeeList() {
 
   useEffect(() => {
     fetch(
-      "http://localhost:3333/events/9e9bd979-9d10-4915-b339-3786b1634f33/attendees"
+      `http://localhost:3333/events/9e9bd979-9d10-4915-b339-3786b1634f33/attendees?pageIndex=${
+        page - 1
+      }`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -147,7 +149,7 @@ export function AttendeeList() {
         <tfoot>
           <tr>
             <TableCell colSpan={3}>
-              Showing 10 of {attendees.length} items
+              Showing {attendees.length} of {total} items
             </TableCell>
 
             <TableCell className="text-right" colSpan={3}>
