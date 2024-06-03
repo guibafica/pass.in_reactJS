@@ -31,35 +31,52 @@ interface IAttendeeProps {
 
 export function AttendeeList() {
   const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(() => {
+    const url = new URL(window.location.toString());
+
+    if (url.searchParams.has("page")) {
+      return Number(url.searchParams.get("page"));
+    }
+
+    return 1;
+  });
   const [attendees, setAttendees] = useState<IAttendeeProps[]>([]);
   const [total, setTotal] = useState(0);
 
   const totalPages = Math.ceil(total / 10);
 
+  const setCurrentPage = useCallback((page: number) => {
+    const url = new URL(window.location.toString());
+
+    url.searchParams.set("page", String(page));
+
+    window.history.pushState({}, "", url);
+    setPage(page);
+  }, []);
+
   const onSearchInputChanged = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       setSearch(e.target.value);
-      setPage(1);
+      setCurrentPage(1);
     },
-    []
+    [setCurrentPage]
   );
 
   const goToNextPage = useCallback(() => {
-    setPage(page + 1);
-  }, [page]);
+    setCurrentPage(page + 1);
+  }, [page, setCurrentPage]);
 
   const goToPreviousPage = useCallback(() => {
-    setPage(page - 1);
-  }, [page]);
+    setCurrentPage(page - 1);
+  }, [page, setCurrentPage]);
 
   const goToFirstPage = useCallback(() => {
-    setPage(1);
-  }, []);
+    setCurrentPage(1);
+  }, [setCurrentPage]);
 
   const goToLastPage = useCallback(() => {
-    setPage(totalPages);
-  }, [totalPages]);
+    setCurrentPage(totalPages);
+  }, [totalPages, setCurrentPage]);
 
   useEffect(() => {
     const url = new URL(
@@ -89,7 +106,7 @@ export function AttendeeList() {
             type="text"
             placeholder="Search for attendees..."
             onChange={onSearchInputChanged}
-            className="bg-transparent flex-1 outline-none border-0 p-0 text-sm ring-0"
+            className="bg-transparent flex-1 outline-none border-0 p-0 text-sm focus:ring-0"
           />
         </div>
       </div>
