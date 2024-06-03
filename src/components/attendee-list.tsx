@@ -30,7 +30,15 @@ interface IAttendeeProps {
 }
 
 export function AttendeeList() {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(() => {
+    const url = new URL(window.location.toString());
+
+    if (url.searchParams.has("search")) {
+      return url.searchParams.get("search") ?? "";
+    }
+
+    return "";
+  });
   const [page, setPage] = useState(() => {
     const url = new URL(window.location.toString());
 
@@ -54,12 +62,21 @@ export function AttendeeList() {
     setPage(page);
   }, []);
 
+  const setCurrentSearch = useCallback((search: string) => {
+    const url = new URL(window.location.toString());
+
+    url.searchParams.set("search", search);
+
+    window.history.pushState({}, "", url);
+    setSearch(search);
+  }, []);
+
   const onSearchInputChanged = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      setSearch(e.target.value);
+      setCurrentSearch(e.target.value);
       setCurrentPage(1);
     },
-    [setCurrentPage]
+    [setCurrentPage, setCurrentSearch]
   );
 
   const goToNextPage = useCallback(() => {
@@ -104,6 +121,7 @@ export function AttendeeList() {
 
           <input
             type="text"
+            value={search}
             placeholder="Search for attendees..."
             onChange={onSearchInputChanged}
             className="bg-transparent flex-1 outline-none border-0 p-0 text-sm focus:ring-0"
