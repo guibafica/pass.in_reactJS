@@ -4,14 +4,14 @@
 
 This is an Front-end web project, build with ReactJS, which simulates an event manager. In this application, the admin will be able to register events, and participants will be able to register, if there is space, and will be able to view their badge, with information about their registration and the event
 
-<!-- ## Project presentation
+## Project presentation
 
 <img
   alt="Pass In"
   title="Pass In' presentation gif"
   src="./src/assets/presentationGif.gif"
   height="425"
-/> -->
+/>
 
 ## Functionalities
 
