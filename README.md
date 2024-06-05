@@ -17,14 +17,14 @@ This is an Front-end web project, build with ReactJS, which simulates an event m
 
 - Events
 
-  - Create an event with Title, Details, Slug and Maximum Attendees.
-  - List an event information by ID.
-  - List all event's participants.
+  [] Create an event with Title, Details, Slug and Maximum Attendees.
+  [] List an event information by ID.
+  [X] List all event's participants.
 
 - Attendees
-  - Create and Register an attendee for an event.
-  - List an attendee's badge information.
-  - Create the attendee check-in.
+  [] Create and Register an attendee for an event.
+  [] List an attendee's badge information.
+  [] Create the attendee check-in.
 
 ## Used Techs
 
