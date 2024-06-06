@@ -33,6 +33,22 @@ This is an Front-end web project, build with ReactJS, which simulates an event m
 - Faker JS: A popular JavaScript library used for generating fake data for testing and development purposes
 - Dayjs: A lightweight JavaScript library designed for parsing, validating, manipulating, and formatting dates and times.
 
+# How to run the project
+
+Node version used: v20.9.0
+
+## Application
+
+```bash
+# To install project dependencies
+yarn
+```
+
+```bash
+# Run the application on localhost -> http://localhost:5173
+yarn dev
+```
+
 # Author
 
 Made with 💚 by Guilherme Bafica 👋
